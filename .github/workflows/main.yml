@@ -1,13 +1,45 @@
-name: CI 
-  on :
-    push:
-      branches: ["main"]
-    pull-request:
-      branches: ["main"]
+name: A basic workflow 
+on :
+  push:
+    branches: [" main "]
+    branches-ignore: ["ignore"]
+    paths: "./github/*"
 
-    workflow_dispatch:
+  pull_request:
+    branches: [" main "]
 
-  jobs:
-    bulid:
-      runs-on:
- 
+  workflow_dispatch:
+jobs:
+    build:
+      runs-on: windows-latest
+
+      steps:
+        - uses: actions/checkout@v3
+        - name: Run a one-line script
+          run: echo Hello World!
+
+        - name: Run a multi-line script
+          run: |
+            echo Hello World 1!            
+            echo Hello World 123! 
+            
+    build-db :
+      needs: build
+      runs-on: windows-latest
+      
+      steps:
+        - run: echo build db!
+
+    package :
+      needs: [build,build-db]
+      runs-on: windows-latest
+      steps:
+        - run: echo package!
+
+    independent:
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo Helllo ubuntu!
+
+    
+
