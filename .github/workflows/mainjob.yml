@@ -19,4 +19,5 @@ jobs:
             echo: "${{env.DAY_OF_WEEK}} is gr8 day"
             echo: ${{env.testvar}}
           env:
+              DAY_OF_WEEK: Funday
               testvar: value3
