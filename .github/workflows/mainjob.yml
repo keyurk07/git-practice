@@ -1,4 +1,4 @@
-name: A basic workflow 123
+name: A basic workflow 123456
 on :
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ jobs:
       steps:
         - name: print value of env var
           run: |
-            echo: "$DAY_OF_WEEK is gr8 day"
+            echo: "${{env.DAY_OF_WEEK}} is gr8 day"
             echo: ${{env.testvar}}
           env:
               testvar: value3
