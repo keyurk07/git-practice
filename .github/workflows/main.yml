@@ -1,37 +1,22 @@
 name: A basic workflow 
 on :
-  push:
-    branches: [" main "]
-
   workflow_dispatch:
+
+env:
+  DAY_OF_WEEK: Funday
+  testvar: value1
 jobs:
-    build:
+    mainjob:
       runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v3
-        - name: Run a one-line script
-          run: echo Hello World!
+      env:
+        greeting: Dear
+        testvar: value2
 
-        - name: Run a multi-line script
+      steps:
+        - name: print value of env var
           run: |
-            echo Hello World 1!            
-            echo Hello World 123! 
-            
-    build-db :
-      needs: build
-      runs-on: windows-latest
-      
-      steps:
-        - run: echo build db!
-
-    package :
-      needs: [build,build-db]
-      runs-on: windows-latest
-      steps:
-        - run: echo package!
-
-    independent:
-      runs-on: ubuntu-latest
-      steps:
-        - run: echo Helllo ubuntu!
+            echo: "$DAY_OF_WEEK is gr8 day"
+            echo: ${{env.testvar}}
+          env:
+              testvar: value3
